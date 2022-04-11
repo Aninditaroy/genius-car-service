@@ -6,7 +6,7 @@ const Service = ({ service }) => {
         <div id='services' className='service shadow-lg'>
             <img className='w-100' src={img} alt="" />
             <h2>{name}</h2>
-            <p>{price}</p>
+            <h5 className='text-muted'>${price}</h5>
             <p><small>{description}</small></p>
             <button className='btn btn-warning'>Book: {name}</button>
         </div>
