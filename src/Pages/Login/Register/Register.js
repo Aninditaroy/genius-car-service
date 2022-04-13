@@ -8,6 +8,9 @@ const Register = () => {
     }
     const handleRegister = event => {
         event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
     }
     return (
         <div className='register-form'>
@@ -26,3 +29,5 @@ const Register = () => {
 };
 
 export default Register;
+
+// Watched 2:35 61-6
