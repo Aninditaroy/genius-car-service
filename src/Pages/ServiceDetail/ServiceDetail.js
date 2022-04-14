@@ -7,7 +7,7 @@ const ServiceDetail = () => {
         <div className='text-center mt-3'>
             <h2>Welcome to detail: {serviceId}</h2>
             <Link to="/checkout">
-                <button className='btn btn-warning'>
+                <button className='btn btn-primary'>
                     Proceed to checkout
                 </button>
             </Link>

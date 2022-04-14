@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png';
+import logo from '../../../images/logo-black.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
@@ -12,7 +12,7 @@ const Header = () => {
     }
     return (
         <>
-            <Navbar collapseOnSelect sticky='top' expand="lg" bg="warning" variant="light">
+            <Navbar collapseOnSelect sticky='top' expand="lg" bg="light" variant="light" className='shadow-lg'>
                 <Container>
                     <Navbar.Brand as={Link} to="/">
                         <img height={35} src={logo} alt="" />
