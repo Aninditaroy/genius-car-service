@@ -1,11 +1,13 @@
-import { async } from '@firebase/util';
+
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -21,6 +23,9 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending, error3] = useSendPasswordResetEmail(auth);
     let errorElement;
+    if(loading || sending){
+        return <Loading/>
+    }
     if (user) {
         navigate(from, { replace: true });
     }
@@ -36,8 +41,13 @@ const Login = () => {
     }
     const resetPassword = async() =>{
        const email = emailRef.current.value;
-       await sendPasswordResetEmail(email);
-       alert('Sent email');
+     if(email){
+        await sendPasswordResetEmail(email);
+        toast('Sent email');
+     }
+     else{
+        toast('Please enter your email address');
+     }
     }
     const navigateRegister = event => {
         navigate('/register');
@@ -59,10 +69,11 @@ const Login = () => {
             </Form>
             {errorElement}
             <br />
-            <p>Forget Password? <Link to="/" className='text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</Link></p>
+            <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button></p>
             <p>New to Genious Car? <Link to="/register" className='text-primary pe-auto text-decoration-none' onClick={navigateRegister}>Please Register</Link></p>
             
             <SocialLogin />
+            <ToastContainer />
         </div>
     );
 };
