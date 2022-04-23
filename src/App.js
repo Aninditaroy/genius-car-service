@@ -11,6 +11,8 @@ import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Checkout from './Pages/Checkout/Checkout/Checkout';
+import AddService from './Pages/AddService/AddService';
+import ManageServices from './Pages/ManageServices/ManageServices';
 function App() {
   return (
     <div>
@@ -35,6 +37,16 @@ function App() {
         <Route path="/checkout" element={
           <RequireAuth>
             <Checkout />
+          </RequireAuth>
+        }></Route>
+        <Route path="/addservice" element={
+          <RequireAuth>
+           <AddService/>
+          </RequireAuth>
+        }></Route>
+        <Route path="/manage" element={
+          <RequireAuth>
+           <ManageServices/>
           </RequireAuth>
         }></Route>
         <Route path="*" element={<NotFound />}></Route>

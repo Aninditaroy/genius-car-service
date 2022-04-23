@@ -5,6 +5,7 @@ import logo from '../../../images/logo-black.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
+import Service from './../../Home/Service/Service';
 const Header = () => {
     const [user] = useAuthState(auth);
     const handleSignOut = () => {
@@ -33,6 +34,12 @@ const Header = () => {
                         </Nav>
                         <Nav>
                             <Nav.Link as={Link} to="about"> About</Nav.Link>
+                            {
+                                user && <>
+                                 <Nav.Link as={Link} to="addservice">Add Service</Nav.Link>
+                                 <Nav.Link as={Link} to="manage">Manage Service</Nav.Link>
+                                </>
+                            }
                             {
                                 user ?
                                     <button onClick={handleSignOut} className='btn ms-3 btn-danger'>Sign out</button>
