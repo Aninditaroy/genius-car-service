@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import axios from 'axios';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     const emailRef = useRef('');
@@ -24,12 +25,13 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending, error3] = useSendPasswordResetEmail(auth);
+    const [token] = useToken(user);
     let errorElement;
     if(loading || sending){
         return <Loading/>
     }
-    if (user) {
-        // navigate(from, { replace: true });
+    if (token) {
+        navigate(from, { replace: true });
     }
     if (error) {
         errorElement =
@@ -40,9 +42,7 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         await signInWithEmailAndPassword(email, password);
-        const {data} = await axios.post('https://frozen-lowlands-77836.herokuapp.com/login', {email});
-        localStorage.setItem('accessToken',data.accessToken);
-        navigate(from, { replace: true });
+        
     }
     const resetPassword = async() =>{
        const email = emailRef.current.value;
